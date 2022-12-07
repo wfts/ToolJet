@@ -3,11 +3,12 @@ import config from 'config';
 import { Link } from 'react-router-dom';
 import { authenticationService, userService } from '@/_services';
 import { history } from '@/_helpers';
-import { DarkModeToggle } from './DarkModeToggle';
 import LogoIcon from '../Editor/Icons/logo.svg';
+import { DarkModeToggle } from './DarkModeToggle';
+import { LanguageSelection } from "./LanguageSelection";
 import { Organization } from './Organization';
 import { NotificationCenter } from './NotificationCenter';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export const Header = function Header({ switchDarkMode, darkMode }) {
   // eslint-disable-next-line no-unused-vars
@@ -54,6 +55,9 @@ export const Header = function Header({ switchDarkMode, darkMode }) {
         <div className="navbar-nav flex-row order-md-last">
           <div className="p-1 m-1 d-flex align-items-center" data-cy="mode-toggle">
             <DarkModeToggle switchDarkMode={switchDarkMode} darkMode={darkMode} />
+          </div>
+          <div className="p-1 m-1 d-flex align-items-center">
+            <LanguageSelection darkMode={darkMode} />
           </div>
 
           {config.COMMENT_FEATURE_ENABLE && (
