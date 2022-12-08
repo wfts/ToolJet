@@ -38,6 +38,7 @@ FROM node:14.17.3-buster
 
 ENV NODE_ENV=production
 ENV NODE_OPTIONS="--max-old-space-size=4096"
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y apt-utils
 RUN apt-get install -y postgresql-client freetds-dev libaio1 wget && \
