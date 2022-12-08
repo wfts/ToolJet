@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  tooljet:
+    build:
+      context: ./
+      dockerfile: ./docker/production.Dockerfile
+    image: tooljet:production
+    platform: linux/x86_64
+    volumes:
+      - ./plugins:/app/plugins
+      - ./frontend:/app/frontend:delegated
+      - ./server:/app/server:delegated
+
+      - /app/frontend/node_modules/
+      - /app/server/node_modules/
+
+      - ./.env:/app/.env
+      - ./.env.test:/app/.env.test
+      - ./.env.production:/app/.env.production
+    ports:
+      - "3000:3000"
+      - "8082:8082"
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+      - NODE_ENV=development
+      - SERVE_CLIENT=false
+      - FORCE_COLOR=1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
