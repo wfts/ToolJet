@@ -149,19 +149,9 @@ export class JSONTreeViewer extends React.Component {
       keys.forEach((key) => {
         const value = data[key];
         const _type = Object.prototype.toString.call(value).slice(8, -1);
-        let newPath = '';
-        if (path === '') {
-          newPath = key;
-        } else {
-          newPath = `${path}.${key}`;
-        }
-
-        if (_.isObject(value)) {
-          map.set(newPath, { type: _type });
-          buildMap(value, newPath);
-        } else {
-          map.set(newPath, { type: _type });
-        }
+        let newPath = path === '' ? key: `${path}.${key}`;
+        map.set(newPath, { type: _type });
+        if (_.isObject(value) && !(value instanceof Element)) buildMap(value, newPath);
       });
     };
 
